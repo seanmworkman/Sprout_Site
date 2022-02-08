@@ -7,7 +7,7 @@
  import { Image } from 'react-native';
  import {
    Button,
-   Card, CardBody,
+   Tooltip,
    Table
  } from 'reactstrap';
 
@@ -40,17 +40,29 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
       super(props);
   
       this.state = {
-        searchTerm: "",
-        method: "0",
         alertMessage: "",
         showDangerAlert: false,
-        result: "0.0"
+        // navseaTooltipOpen: false,
+        // nipoTooltipOpen: false,
+        // vmascTooltipOpen: false,
       };
     }  
   
     componentDidMount() {
-
+      window.scrollTo(0, 0);
     }
+
+    // toggleNavseaTooltip = () => {
+    //   this.setState({navseaTooltipOpen: !this.state.navseaTooltipOpen});
+    // }
+
+    // toggleNipoTooltip = () => {
+    //   this.setState({nipoTooltipOpen: !this.state.nipoTooltipOpen});
+    // }
+
+    // toggleVmascTooltip = () => {
+    //   this.setState({vmascTooltipOpen: !this.state.vmascTooltipOpen});
+    // }
   
     /**
      * Sets the success alert message and the show state.
@@ -86,43 +98,12 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
       }
     }
 
-    // runSearch = async () => {
-    //   try {
-    //     console.log('searchTerm:', this.state.searchTerm)
-    //     console.log('method:', this.state.method)
-    //     let res = await client.query({
-    //       query: SEARCH,
-    //       variables: {
-    //         searchTerm: this.state.searchTerm,
-    //         method: this.state.method
-    //       },
-    //       fetchPolicy: 'network-only'
-    //     });
-    //     this.setState({
-    //       result: res.data.runSearchAndAnalysis
-    //     });
-    //   } catch (err) {
-    //     console.log(JSON.stringify(err, null, 2));
-    //   }
-    // }
+    tryOurTeam = () => {
+      window.location.href = '/#/OurTeam';
+    }
 
-    displayResult = () => {
-      let result = parseFloat(this.state.result);
-      let polarity = "Neutral";
-      if (result < -0.05 && result > -0.15) polarity = "Slightly Negative";
-      else if (result < 0.15 && result > 0.05) polarity = "Slightly Positive";
-      else if (result === -1.0) polarity = "Very Negative";
-      else if (result === 1.0) polarity = "Very Positive";
-      else if (result < -0.15) polarity = "Negative";
-      else if (result > 0.15) polarity = "Positive";
-      return (
-        <Card>
-            <CardBody>
-                Polarity: {polarity}<br />
-                Aggregate Sentiment: {result}
-            </CardBody>
-        </Card>
-      );
+    tryServices = () => {
+      window.location.href = '/#/Services';
     }
   
     render() {
@@ -204,7 +185,8 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
                       That's why we support intelligence & enterprise quality as the core of federal software.
                     </div>
                     <div className='right2'>
-                      <Button color='warning' style={{ paddingRight: '1%' }}>MEET OUR TEAM</Button>{'  '}<Button outline color='warning'>LEARN ABOUT OUR PRODUCTS</Button>
+                      <Button color='warning' style={{ paddingRight: '1%' }} onClick={() => this.tryOurTeam()}>MEET OUR TEAM</Button>{'  '}
+                      <Button outline color='warning' onClick={() => this.tryServices()}>LEARN ABOUT OUR PRODUCTS</Button>
                     </div>
                 </div>
                 <div className='section3'>
@@ -260,6 +242,9 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
                               flex: 1,
                               alignSelf: 'center'
                           }} source={NAVSEA} />
+                        {/* <Tooltip placement="bottom" isOpen={this.state.navseaTooltipOpen} target="home" toggle={this.toggleNavseaTooltip}>
+                          NAVSEA
+                        </Tooltip> */}
                         </td>
                         <td>
                         <Image style={{
@@ -269,6 +254,9 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
                               flex: 1,
                               alignSelf: 'center'
                           }} source={NIPO} />
+                        {/* <Tooltip placement="bottom" isOpen={this.state.nipoTooltipOpen} target="home" toggle={this.toggleNipoTooltip}>
+                          NIPO
+                        </Tooltip> */}
                         </td>
                         <td>
                         <Image style={{
@@ -278,6 +266,9 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
                               flex: 1,
                               alignSelf: 'center'
                           }} source={VMASC} />
+                        {/* <Tooltip placement="bottom" isOpen={this.state.vmascTooltipOpen} target="home" toggle={this.toggleVmascTooltip}>
+                          VMASC
+                        </Tooltip> */}
                         </td>
                       </tr>
                     </tbody>

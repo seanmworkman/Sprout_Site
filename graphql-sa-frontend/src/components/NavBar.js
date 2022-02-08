@@ -26,17 +26,17 @@ const _ = require("lodash");
 
 const uuidv4 = require('uuid/v4');
 
-let client;
-if (process.env.NODE_ENV === 'production') {
-    client = new ApolloClient({
-        link: createHttpLink({ uri: "http://sprout-server:4000/graphql" })
-    });
-}
-else {
-    client = new ApolloClient({
-        link: new HttpLink({ uri: 'http://localhost:4000/graphql' })
-    })
-}
+// let client;
+// if (process.env.NODE_ENV === 'production') {
+//     client = new ApolloClient({
+//         link: createHttpLink({ uri: "http://sprout-server:4000/graphql" })
+//     });
+// }
+// else {
+//     client = new ApolloClient({
+//         link: new HttpLink({ uri: 'http://localhost:4000/graphql' })
+//     })
+// }
 
 class NavBar extends Component {
 
